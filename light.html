@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Migy's Cipher</title>
+    </head>
+
+    <body style="text-align:center;margin:60px">
+        <h2>Caesar Cipher</h2>
+        <p>Secret message: <input id="text" size="80"></p>
+        <p>Shift by key: <input id="key" size="2" value="3"></p>
+        <p>Encoded message:
+            <span id="output" style="color:red"></span>
+        </p>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script>
+            $('input').keyup(function() {
+                var k = Number($('#key').val());
+                if (!(k >=0 && k < 27)) {
+                    $('#output').html('Key should be between 0 and 25');
+                    return;
+                }
+                var secret = $('#text').val().toLowerCase();
+                var encoded = '';
+                var alphabet = 'abcdefghijklmnopqrstuvwxyz';
+                for (var j = 0; j < secret.length; j += 1) {
+                    var nextchar = secret.charAt(j); //d
+                    var index = alphabet.indexOf(nextchar); //4
+                    console.log(index);
+                    // console.log(nextchar);
+                    if (index >= 0) {
+                        var shifted = (index + k) % 27; //9
+                        console.log(shifted);
+                        encoded += alphabet.charAt(shifted);
+                    } else {
+                        encoded += nextchar;
+                    }
+                }
+                $('#output').html(encoded);
+            });
+        </script>
+    </body>
+</html>
+​
